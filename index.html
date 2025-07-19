@@ -40,6 +40,7 @@
             background-color: #e2e8f0; /* Light gray-blue */
             color: #2d3748; /* Darker gray text */
             transition: transform 0.2s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease;
+            border: 2px solid #003366; /* Added dark blue border */
         }
 
         /* Button hover effect */
@@ -54,6 +55,7 @@
             color: white;
             box-shadow: 0 4px 14px 0 rgba(0, 51, 102, 0.3);
             transform: translateY(-2px);
+            border-color: #003366; /* Ensure border color matches on active */
         }
 
         /* Custom style for dropdown background */
@@ -77,7 +79,7 @@
             </header>
 
             <!-- Language selection buttons -->
-            <div class="flex justify-center space-x-2 md:space-x-4 border-b pb-4 mb-4">
+            <div class="flex justify-center space-x-2 md:space-x-4 border-b pb-4 mb-4 border-gray-300">
                 <button id="btn-zh" class="lang-btn flex-1 md:flex-none md:px-8 py-3 text-base md:text-lg font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     中文讀書計畫
                 </button>
@@ -89,7 +91,7 @@
             <!-- Dropdown container -->
             <div class="text-center mb-4 select-container">
                 <!-- Chinese dropdown -->
-                <select id="select-zh" class="w-full max-w-md p-3 border border-gray-600 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition hidden">
+                <select id="select-zh" class="w-full max-w-md p-3 border border-gray-400 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition hidden">
                     <option value="">請選擇讀書計畫階段</option>
                     <option value="zh-phase1">近程目標：奠基與定向</option>
                     <option value="zh-phase2">中程目標：精進與深化</option>
@@ -97,7 +99,7 @@
                     <option value="zh-conclusion">結語：選擇臺大之承諾</option>
                 </select>
                 <!-- English dropdown -->
-                <select id="select-en" class="w-full max-w-md p-3 border border-gray-600 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition hidden">
+                <select id="select-en" class="w-full max-w-md p-3 border border-gray-400 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition hidden">
                     <option value="">Please Select a Section</option>
                     <option value="en-phase1">Short-Term Goals: Foundation & Orientation</option>
                     <option value="en-phase2">Mid-Term Goals: Refinement & Deepening</option>
@@ -156,7 +158,7 @@
                 <p class="mb-4">完成PGY訓練後，我的首要目標是進入臺大醫院外科部接受住院醫師訓練，並最終成為一名主治醫師。我對外科的熱愛，源於刀鋒之間傳遞溫度的人性關懷與。我所嚮往的外科，是緊密結合人工智慧的新世代外科。</p>
                 <p class="mb-4">我的具體計畫是在住院醫師訓練階段，積極爭取參與臺大醫院「智慧醫療中心」的研究計畫。我從貴院網站了解到外科部的吳經閔副主任等教授，也在共同探討智慧醫療相關研究。我希望能有機會在他們的指導下，投入「外科手術AI應用」的領域。例如，建立病患專屬的虛擬解剖模型，能讓外科醫師在術前模擬手術路徑、預測風險與結果，是邁向個人化精準醫療的重要一步。我期許自己能成為一名懂得結合人工智慧，為病人擘劃最佳手術方案的「外科醫師科學家」。</p>
                 <h3 class="text-xl font-semibold mt-6 mb-2">前瞻研究與國際鏈結</h3>
-                <p class="mb-4">在成為獨當一面的外科主治醫師後，我的研究熱情將驅使我向更前沿的領域探索。我認為，機器人輔助手術目前的一大瓶頸，是缺乏「觸覺回饋」( Haptic Feedback），而外科醫師往往需依靠指尖觸感判斷組織的質地與張力。我的研究構想，是開發新型感測技術，將模擬出的組織觸感即時回傳到手術機械臂，讓醫師在遠端操作時也能感受到實際手感。這項技術不僅具學術價值，更可能改變外科手術的未來。</p>
+                <p class="mb-4">在成為獨當一面的外科主治醫師後，我的研究熱情將驅使我向更前沿的領域探索。我認為，機器人輔助手術目前的一大瓶頸，是缺乏「觸覺回饋」( Haptic Feedback），而外科醫師往往需依靠指尖觸感判斷組織の質地與張力。我的研究構想，是開發新型感測技術，將模擬出的組織觸感即時回傳到手術機械臂，讓醫師在遠端操作時也能感受到實際手感。這項技術不僅具學術價值，更可能改變外科手術的未來。</p>
                 <p class="mb-4">為了實現此一宏願，我將持續鑽研頂尖學術期刊如《Journal of the American College of Surgeons》及《Annals of Surgery》等最新文獻，並積極參與國內外學術研討會與研究。我觀察到，近年來關於AI在外科的應用正快速增長，例如著名美國心臟科醫師Eric Topol對與人工智慧結合醫學的研究，這成為激發我思考與行動的重要契機。</p>
                 <p class="mb-4">另外，在此階段我計畫了一段獨特的國際進修。我的家庭背景讓我對越南有著特殊的情感連結，因此，我計畫在取得專科醫師資格後，申請前往越南胡志明市的法越醫院 (FV Hospital） 進修。法越醫院是越南首家獲得JCI國際認證的頂尖私立醫院，引進了如CyberKnife S7等先進的放射外科機器人系統，代表了在不同社會經濟體下，追求卓越醫療的典範。我希望自己能夠體驗並學習其融合歐洲醫療管理模式與科技，並將這些寶貴的跨國、跨體系經驗帶回臺灣，為提升臺灣的醫療服務與國際競爭力貢獻己力。</p>
                 <h3 class="text-xl font-semibold mt-6 mb-2">傳承與貢獻：不負白袍之託付</h3>
@@ -256,9 +258,9 @@
         selectZh.addEventListener('change', (e) => displayContent(e.target.value));
         selectEn.addEventListener('change', (e) => displayContent(e.target.value));
 
-        // Initial state
-        switchLanguage('zh'); // Default to Chinese
+        // Initial state - Removed the default language selection to hide dropdowns initially
+        // switchLanguage('zh'); 
 
     </script>
 </body>
-</ht
+</html>
