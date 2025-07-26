@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statement of Purpose - NCKU Medicine</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* 淺藍灰色背景 */
+        }
+        .container {
+            max-width: 900px; /* 增加最大寬度以提高可讀性 */
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem; /* 更圓的邊角 */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* 更柔和的陰影 */
+        }
+        .content-area {
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            background-color: #f8fafc; /* 內容區域的淺色背景 */
+            min-height: 200px; /* 確保即使內容很短也有一定高度 */
+            max-height: 60vh; /* 限制高度以用於可滾動內容 */
+            overflow-y: auto; /* 啟用長內容的滾動 */
+            line-height: 1.75; /* 提高行高以提高可讀性 */
+        }
+        .content-area h3 {
+            font-size: 1.25rem; /* 更大的副標題 */
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            color: #2563eb; /* 副標題的藍色 */
+        }
+        .content-area p {
+            margin-bottom: 0.75rem;
+        }
+        .audio-player-container {
+            display: flex;
+            justify-content: center; /* 水平置中內容 */
+            align-items: center; /* 垂直置中內容 */
+            width: 100%; /* 使其全寬以更好地響應 */
+        }
+        /* 響應式調整按鈕和下拉選單 */
+        @media (min-width: 640px) { /* 小型螢幕及以上 */
+            .action-buttons-flex-row {
+                flex-direction: row;
+            }
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+    <div class="container text-center">
+        <!-- Logo -->
+        <div class="mb-6">
+            <img src="https://i.meee.com.tw/9qhvj9q.png" alt="NCKU Logo" class="mx-auto w-2/3 h-auto rounded-full">
+        </div>
+
+        <!-- Main Title -->
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-gray-800 mb-3">Statement of Purpose
+            <p>-Wang Ke Jing-</p>
+        </h1>
+        <!-- Subtitle -->
+        <h2 class="text-1xl sm:text-1xl font-semibold text-gray-600 mb-2">Admission to the School of Medicine, NCKU</h2>
+
+        <!-- Dropdown Menu -->
+        <div class="mb-8">
+            <select id="phaseSelect" class="block mx-auto w-full md:w-2/3 lg:w-1/2 p-3 text-lg border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out cursor-pointer">
+                <option value="default">Please Select a Phase...</option>
+                <option value="phase1">Phase 1: Foundation and Orientation</option>
+                <option value="phase2">Phase 2: Refinement and Deepening</option>
+                <option value="phase3">Phase 3: From Vision to Vocation</option>
+                <option value="conclusion">Conclusion: NCKU Is More Than a Choice</option>
+            </select>
+        </div>
+
+        <!-- Action Buttons (initially hidden) -->
+        <div id="actionButtons" class="hidden flex flex-col sm:flex-row justify-center gap-4 mb-2">
+            <button id="browseBtn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                Browse Content
+            </button>
+            <button id="listenBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                Listening Content
+            </button>
+        </div>
+
+        <!-- Content Display Area -->
+        <div id="contentDisplay" class="content-area text-left hidden"></div>
+
+        <!-- Audio Player Area -->
+        <div id="audioPlayerContainer" class="audio-player-container hidden">
+            <!-- 音頻元素設定為響應式寬度並水平置中 -->
+            <audio id="audioPlayer" controls class="w-full md:w-3/4 lg:w-1/2 mx-auto">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        // 取得 HTML 元素的引用
+        const phaseSelect = document.getElementById('phaseSelect');
+        const actionButtons = document.getElementById('actionButtons');
+        const browseBtn = document.getElementById('browseBtn');
+        const listenBtn = document.getElementById('listenBtn');
+        const contentDisplay = document.getElementById('contentDisplay');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const audioPlayerContainer = document.getElementById('audioPlayerContainer');
+
+        // 各階段的內容（從提供的 Markdown 中提取）
+        const phasesContent = {
+            phase1: {
+                text: `<p>To become a student who aligns with the expectations of the School of Medicine at National Cheng Kung University, my high school years were not solely dedicated to academic achievement but were a foundational journey for the future. I saw that period as a time of “quiet cultivation,” laying deep roots for steadily ascending the summit of medicine. From “science and the humanities” to the frontiers of medical research, I prepared myself comprehensively across these three domains to embrace the challenges ahead.</p>
+                        <h3>Building a scaffold for scientific understanding</h3>
+                        <p>I understand medicine is built on solid ground in the basic sciences. Hence, during high school, I put exceptional effort into Biology, Chemistry, Physics, and Mathematics—not content with simply learning them in class but intent on understanding the principles underlying the knowledge. I feel that only a good understanding of a few basic scientific principles will enable one to integrate complex medical knowledge in the future.
+                        Before entering NCKU, I plan to preview several key subjects. I will make a schedule to learn Calculus by myself, using online resources. And also cellular structures and how life works in the basics of Biology. I plan to learn Organic Chemistry and Biochemistry and to become fluent in the language of amino acids, enzymes, and metabolic pathways.</p>
+                        <h3>Cultivating humanistic qualities</h3>
+                        <p>A good physician embodies a scientific mind and a humanistic heart. Hence, I have pursued community service seeking empathy, communication, teamwork, and problem-solving skills. A continual endeavor, a multidimensional approach of professional knowledge and humanistic literacy, suitable for the ideal of NCKU's matching integrated medicine and the humanities. Consequently, I earnestly seek to project a composite image of professional knowledge and humanistic literacy.
+                        During the summer, I will continue to further my volunteering at the hospital, where I will be able to closely witness doctor-patient relations and internalize the tenets of holistic care. </p>
+                        <h3>Exploring the frontiers of medicine</h3>
+                        <p>Acting on such motivation, I did not limit my learning to school. Since I knew that NCKU highly regarded student-centered learning and enthusiasm for scientific inquiry, I engaged myself vigorously in independent research on smart medicine.
+                        I would therefore like to advance my knowledge of molecular medicine, specifically the link between protein structures and the mechanisms of diseases, before entering medical school. Given my prior research on Alzheimer's disease in relation to β-amyloid, I think that studying bioinformatics will allow me to gain critical thinking and scientific literacy skills by keeping up with academic journals. Thus, such an investigation will form a strong basis in clinical and laboratory work.</p>`,
+                audio: "NCKU-Phase-1.mp3"
+            },
+            phase2: {
+                text: `<p>If given the honor of entering the School of Medicine, National Cheng Kung University, I have a very concrete and realistic six-year study plan that I would pursue with full commitment to developing excellent medical training in terms of solid academic knowledge, clinical skills, and humanistic aspects.</p>
+                        <h3>Years 1–2: Interdisciplinary Integration and a Broad Academic Foundation</h3>
+                        <p>What stands out impressively is that NCKU has moved away from rote memorization and now embraces the principles of group-based and inquiry-based learning. I believe that my first two years will serve as the grounding years, where I intend to be open to the rich opportunities for interdisciplinary learning. In this regard, I will focus on mastering the fundamentals of General Chemistry, Organic Chemistry, General Biology, and Biochemistry. Furthermore, I want to use digital tools to develop a personalized knowledge management system in Notion and will contribute in this regard to the departmental project of collaborative note-taking as a way to reinforce learning through collaboration.
+                        In the humanities, I will take such courses as sociology, where I will learn to develop critical thinking when asking how social class shapes the policies and outcomes of health insurance. I wish to expand my horizons with general education courses. In Year 2, I will participate in more group discussions, interact with students from diverse backgrounds, and make use of time management to shape lifelong practices in self-directed learning—one of the labels a day for any physician. I plan to have a 4.0 GPA at this stage.</p>
+                        <p>Outside the classroom, I want to hold medical camps and share my experiences with junior students. I would also join the Medical Service Club at NCKU to continue my services to other people. The other club I would join at NCKU is the Image Association, which hones communication and public speaking skills. A physician should be a healer, an educator, and a communicator, in essence. One of the milestones I want to achieve in my life is hosting the White Coat Ceremony for medical students.
+                        Let me briefly outline my plans in this section. I will try to pursue some leadership positions in clubs to improve my organizing skills and read English medical journals so that I can use specific language in my profession and international communication.</p>
+                        <h3>Years 3–4: Deepening Core Knowledge and Developing Clinical Thinking</h3>
+                        <p>With the start of core courses in Year 3, such as Anatomy and Histology, I anticipate a significant leap in both the depth and breadth of learning. I especially look forward to cadaver dissection as a way to transform theoretical knowledge into a 3D anatomical understanding, approached with utmost respect for the silent teachers.
+                        I will fully utilize NCKU’s academic resources—laboratories, libraries, and Collaborative Notes—to prepare for clinical learning. Facing the first stage of the national physician licensing exam at the end of Year 4, I will adopt a systematic study strategy: organizing knowledge around major body systems (cardiovascular, respiratory, and digestive) and integrating content from Anatomy, Physiology, Biochemistry, Pharmacology, Pathology, and Microbiology. This will create a coherent knowledge framework rather than fragmented memorization. I will also practice past exams and analyze my mistakes to strengthen my readiness.</p>
+                        <h3>Years 5–6: Clinical Immersion and Practical Application</h3>
+                        <p>Clinical rotations are a crucial point where knowledge turns into healing power. With humility and devotion, I shall start my clinical training at NCKU Hospital by following attendings during ward rounds, attending morning meetings, and discussing cases to learn the logic behind clinical decision-making.
+                        I will acquire all the clinical skills orientation from history-taking to medical record writing and the total patient care concept, embedding patients' medical, psychological, and social issues in the patient's core. I aim to become a competent clerk and co-traveler with the patient in the journey towards health.
+                        NCKU has great international exchange opportunities for toppers with other universities, enabling me to engage in such short-term overseas exchanges during Year 5 or 6, exchanges with the University of Hong Kong or the National University of Singapore, which may further nurture my global health perspective.
+                        The goal for this stage is to complete the second step within the national physician licensing exams and the Objective Structured Clinical Examination, which serve as the conduits through which one acquires one's physician license, then moves on to applying for a PGY for residency at National Cheng Kung University Hospital.</p>`,
+                audio: "NCKU-Phase-2.mp3"
+            },
+            phase3: {
+                text: `<p>“Before becoming a good doctor, one must first become a successful person.” This motto has guided my career vision from the start. I aspire not only to be a technically proficient surgeon but also a compassionate physician with social awareness, empathy, and responsibility. I want my surgical practice to be not only a matter of technique but also a bridge that connects people, ideas, and communities.</p>
+                        <h3>A Surgeon’s Art: Precision and Empathy Combined</h3>
+                        <p>I intend to pursue training after PGY with a surgical residency program at National Cheng Kung University Hospital and assume the role of attending surgeon. Surgery is interesting due to the unique combination of technical skills and human compassion that coincide during an operation on the table. I see myself within next-gen surgery, tightly integrated into AI.
+                        During my residency, I thus hope to gain knowledge of surgical applications of AI. I hope to become a “surgical physician-scientist,” integrating AI into optimizing surgical planning for each patient. For instance, patient-specific virtual anatomical modeling will enable the surgeon to practice the procedure, assess risks, and predict outcomes before actually entering the operating room—a critical step toward personalized precision medicine.</p>
+                        <h3>Innovative Research and International Exchange</h3>
+                        <p>As a future attending surgeon, I will dive into my passion for research into its next frontiers. One of the significant limitations robotic surgery faces today is the absence of haptic feedback; however, surgeons often depend on fingertip sensations for information regarding the tension and texture of tissues. I expect to be involved in research that develops new technologies. For example, simulated tactile feedback through robotic surgical arms to afford surgeons "the sense of touch" while operating remotely on the tissues. I believe this would be revolutionary in the field of surgery.
+                        Under the inspiration of pioneers, Dr. Eric Topol, who brings AI into medicine, is indeed one source of inspiration and motivation for me. In order to continue this further, I would hope to be actively involved in further studies at programs such as the Journal of the American College of Surgeons and Annals of Surgery and to attend international meetings and research on this topic. </p>
+                        <p>Apart from this, I have some special plans for international exposure. Given my family background, I have a strong emotional attachment to Vietnam. After my board certification in surgery, I will proceed with an international fellowship at Franco-Vietnamese Hospital (FV Hospital) in Ho Chi Minh City. Being the first privately held hospital in Vietnam to gain JCI accreditation, FV Hospital has an integrated system that includes the first CyberKnife S7 technology for radiosurgery. Indeed, it has state-of-the-art healthcare in a different but challenging socioeconomic context. I would consider it a great experience learning from such models inspired by Europe and bringing such cross-national insights into Taiwan for our medical system's better global competitiveness.</p>
+                        <h3>To Serve and Encourage: Bearing the Responsibility of the White Coat</h3>
+                        <p>A physician's role extends far beyond the practice of medicine into the realms of teaching and service to society. I aspire to take part in medical education and pass along clinical experiences and my passion for technology to the next generation, much like my mentors did for me. Furthermore, I plan to participate in international medical outreach programs and use the skills I develop at NCKU to serve the less fortunate, which is the noblest ideal of serving humanity.
+                        From the curiosity of childhood to a well-charted plan today, my passion for medicine only grows stronger. I am deeply committed to joining NCKU's medical community, where I know I will receive world-class training, visionary exposure, and a solid humanistic foundation.
+                        A physician's role extends far beyond the practice of medicine into the realms of teaching and service to society. I aspire to take part in medical education and pass along clinical experiences and my passion for technology to the next generation, much like my mentors did for me. Furthermore, I plan to participate in international medical outreach programs and use the skills I develop at NCKU to serve the less fortunate and the noblest ideal of serving humanity.</p>`,
+                audio: "NCKU-Phase-3.mp3"
+            },
+            conclusion: {
+                text: `<p>It is not merely an academic road map but an oath to myself, medicine, and society. A conviction within me goes beyond being a surgeon; I believe I would be joining NCKU in spirit, blending technology and humanity to give hope to the patients in the development of their futures in medical care. This belief has been deeply ingrained in me through years of reflection and personal growth. The evolving intersection between technology and healthcare offers the potential for profound change, and I am driven to explore this fusion further.
+                        I sincerely hope to be granted the opportunity to learn and grow at the School of Medicine, National Cheng Kung University, and to devote my life to honoring the white coat and fulfilling society’s trust. I am ready to embrace the challenges ahead and to dedicate my knowledge and compassion to the service of others. Through this journey, I aim to uphold the core values =of integrity, excellence, and human dignity, making meaningful contributions to the field of medicine and society as a whole.</p>`,
+                audio: "NCKU-Conclusion.mp3"
+            }
+        };
+
+        // 為下拉選單的變更添加事件監聽器
+        phaseSelect.addEventListener('change', () => {
+            const selectedPhase = phaseSelect.value;
+
+            // 隱藏先前的內容/音頻和按鈕
+            contentDisplay.classList.add('hidden');
+            audioPlayerContainer.classList.add('hidden');
+            actionButtons.classList.add('hidden');
+            audioPlayer.pause(); // 暫停任何正在播放的音頻
+            audioPlayer.removeAttribute('src'); // 清除音頻來源
+
+            if (selectedPhase !== 'default') {
+                actionButtons.classList.remove('hidden'); // 如果選擇了階段，顯示按鈕
+            }
+        });
+
+        // 為「瀏覽內容」按鈕添加事件監聽器
+        browseBtn.addEventListener('click', () => {
+            const selectedPhase = phaseSelect.value;
+            if (selectedPhase !== 'default' && phasesContent[selectedPhase]) {
+                contentDisplay.innerHTML = phasesContent[selectedPhase].text;
+                contentDisplay.classList.remove('hidden');
+                audioPlayerContainer.classList.add('hidden'); // 隱藏音頻播放器
+                audioPlayer.pause(); // 暫停任何正在播放的音頻
+            }
+        });
+
+        // 為「聆聽內容」按鈕添加事件監聽器
+        listenBtn.addEventListener('click', () => {
+            const selectedPhase = phaseSelect.value;
+            if (selectedPhase !== 'default' && phasesContent[selectedPhase]) {
+                const audioUrl = phasesContent[selectedPhase].audio;
+                audioPlayer.src = audioUrl;
+                audioPlayerContainer.classList.remove('hidden');
+                contentDisplay.classList.add('hidden'); // 隱藏文字內容
+                audioPlayer.play().catch(e => console.error("播放音頻時出錯：", e)); // 自動播放並處理錯誤
+            }
+        });
+    </script>
+</body>
+</html>
