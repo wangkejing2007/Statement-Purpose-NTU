@@ -1,269 +1,91 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>臺灣大學醫學系讀書計畫</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>我的讀書計畫</title>
     <style>
+        @font-face {
+            font-family: 'DFHannotateTC-W5';
+            src: local('DFHannotateTC-W5'), url('https://fonts.gstatic.com/s/notosanstc/v21/-nF6OG829Oofr2wohFbTp9i1fQYKQaA.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
         body {
-            font-family: 'Inter', 'Noto Sans TC', sans-serif;
-            background-color: #f0eee4; /* A slightly darker, academic cream color */
+            background-color: #FFF5F7;
+            font-family: 'Helvetica Neue', '微軟正黑體', 'Microsoft JhengHei', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-        /* Content fade-in animation */
-        .content-fade-in {
-            opacity: 0;
-            animation: fadeIn 0.8s ease-in-out forwards;
+        .container {
+            text-align: center;
+            background-color: #FFFFFF;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(214, 186, 191, 0.4);
+            width: 90%;
+            max-width: 800px;
         }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .header-image {
+            width: 60%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 5px;
         }
-        
-        /* Container for the select dropdown to prevent content jumping */
-        .select-container {
-            min-height: 60px; 
+        h1 {
+            font-size: 48px;
+            color: #4F4F4F;
+            font-weight: 900;
+            font-family: 'DFHannotateTC-W5', '華康特明體', serif;
+            margin-top: 10px;
+            margin-bottom: 5px;
         }
-
-        /* General button style */
-        .lang-btn {
-            background-color: #e2e8f0; /* Light gray-blue */
-            color: #2d3748; /* Darker gray text */
-            transition: transform 0.2s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease;
-            border: 2px solid #003366; /* Added dark blue border */
+        h2 {
+            font-size: 30px;
+            color: #4F4F4F;
+            font-weight: 700;
+            margin-bottom: 30px;
         }
-
-        /* Button hover effect */
-        .lang-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
         }
-
-        /* Active button state */
-        .btn-active {
-            background-color: #003366; /* A representative color for NTU/Academia */
-            color: white;
-            box-shadow: 0 4px 14px 0 rgba(0, 51, 102, 0.3);
-            transform: translateY(-2px);
-            border-color: #003366; /* Ensure border color matches on active */
+        .action-button {
+            text-decoration: none;
+            color: #FFFFFF;
+            background-color: #333866;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 28px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(51, 56, 102, 0.6);
+            display: inline-block;
         }
-
-        /* Custom style for dropdown background */
-        select {
-            background-color: #E5E7EB; /* Light gray background for dropdowns (Tailwind gray-200) */
+        .action-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(51, 56, 102, 0.8);
+            color: #A3A3A3;
         }
-
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
-
-    <main class="flex-grow flex items-center justify-center p-4">
-        <div class="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6 md:p-10">
-            <!-- 新增的圖片 -->
-            <div class="flex justify-center mb-2">
-                <img src="https://i.meee.com.tw/wyn8U4j.png" alt="台大醫學系徽" class="w-1/3" style="max-width: 250px;" onerror="this.style.display='none'">
-            </div>    
-            <header class="text-center mb-6">
-                <h1 class="text-3xl md:text-5xl font-bold text-[#41656b] flex flex-col items-center leading-tight md:leading-snug">
-                    <span>國立臺灣大學醫學系</span>
-                    <span class="text-2xl md:text-4xl">王可靜-中英文讀書計畫</span>
-                </h1>
-                <p class="mt-2 font-bold" style="color: #616666;">Statement of Purpose for School of Medicine, NTU</p>
-            </header>
-
-            <!-- Language selection buttons -->
-            <div class="flex justify-center space-x-2 md:space-x-4 pb-4 mb-4">
-                <button id="btn-zh" class="lang-btn flex-1 md:flex-none md:px-8 py-3 text-base md:text-lg font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    中文讀書計畫
-                </button>
-                <button id="btn-en" class="lang-btn flex-1 md:flex-none md:px-8 py-3 text-base md:text-lg font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    Statement of Purpose
-                </button>
-            </div>
-
-            <!-- Dropdown container -->
-            <div class="text-center mb-4 select-container">
-                <!-- Chinese dropdown -->
-                <select id="select-zh" class="w-full max-w-md p-3 border border-gray-400 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition hidden">
-                    <option value="">請選擇讀書計畫階段</option>
-                    <option value="zh-phase1">近程目標：奠基與定向</option>
-                    <option value="zh-phase2">中程目標：精進與深化</option>
-                    <option value="zh-phase3">遠程目標：抱負與實踐</option>
-                    <option value="zh-conclusion">結語：選擇臺大之承諾</option>
-                </select>
-                <!-- English dropdown -->
-                <select id="select-en" class="w-full max-w-md p-3 border border-gray-400 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition hidden">
-                    <option value="">Please Select a Section</option>
-                    <option value="en-phase1">Short-Term Goals: Foundation & Orientation</option>
-                    <option value="en-phase2">Mid-Term Goals: Refinement & Deepening</option>
-                    <option value="en-phase3">Long-Term Goals: From Vision to Vocation</option>
-                    <option value="en-conclusion">Conclusion: NTU Is More Than a Choice</option>
-                </select>
-            </div>
-
-            <!-- Content display area -->
-            <div id="content-display" class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-                <!-- Content will be dynamically loaded here -->
-            </div>
-
+<body>
+    <div class="container">
+        <img src="https://youke1.picui.cn/s1/2025/07/26/6884538e3b0e7.png" alt="讀書計畫主圖" class="header-image">
+        <h1>Statement of Purpose</h1>
+        <h2 style="font-size: 30px; color: #4F4F4F; font-weight: 700; margin-top: 5px; margin-bottom: 20px;">王可靜的讀書計畫</h2>
+        <div class="button-group">
+            <a href="reading.html" class="action-button" target="_blank">瀏覽讀書計畫</a>
+            <a href="listening.html" class="action-button" target="_blank">聆聽讀書計畫</a>
         </div>
-    </main>
-
-    <footer class="w-full text-center py-4">
-        <p class="font-bold text-sm" style="color: #41656b;">(越南)胡志明市臺灣學校 / 王可靜</p>
-    </footer>
-
-    <script>
-        // Object to store the study plan content, updated from the new files.
-        const studyPlanContent = {
-            // Chinese Content from the latest file
-            'zh-phase1': `
-                <h2 class="text-2xl font-bold mb-4">近程目標：奠基與定向--大學前準備</h2>
-                <p class="mb-4">為了成為一名符應臺大醫學系期望的學生，我的高中歲月不僅是努力追求成績，更是一段為未來奠基的旅程。我將那段時光視為靜靜耕耘、深植根基的階段，為的是日後能一步步穩健攀向醫學這座高峰。從科學、人文到醫學前沿，我以三個面向全方位準備自己，迎接未來的挑戰。</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">構築科學的鷹架</h3>
-                <p class="mb-4">我深知醫學乃是建立在紮實的基礎科學之上。因此，在高中階段，我對生物、化學、物理及數學等科目投入了極大的心力，不僅滿足於課堂所學，更追求「知其然，更要知其所以然」的深度理解。我相信，唯有對基礎科學原理的透徹掌握，未來在面對複雜的醫學知識時，才能觸類旁通、融會貫通。</p>
-                <p class="mb-4">在踏入臺大醫學系之前，我希望先行預習幾門重要學科。除了預習微積分，我將從普通生物學出發，重溫細胞與生命的基本構造，理解人體的微觀運作；再進入有機化學與生物化學的世界，熟悉胺基酸、酵素與代謝途徑的語言。</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">涵養人文的深度</h3>
-                <p class="mb-4">一名良醫，除了需要科學的腦，更需要人文的心。因此，若有幸進入貴系，我將持續積極的參與社會服務。入學前的暑假，我將申請擔任醫院志工，近距離觀察醫病互動，並深入了體會「全人照護」の理念。訓練自己的同理心、溝通能力、團隊合作精神，以及解決問題的能力，以期培養出兼具業知識與人文素養的視野，進一步契合臺大醫學系所強調的「醫學與人文」核心理念。</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">探索醫學的前沿</h3>
-                <p class="mb-4">懷抱著對未來的期望，我並未將學習侷限於校園之內。我知道臺大醫學系非常重視學生的「自主學習」能力，以及對於「探索科學領域」的研究熱誠。為此、我投入了許多心力於我的高中自主學習研究計畫，特別是在我深感興趣的智慧醫療領域。</p>
-                <p>在進入醫學系之前，我期許自己能夠持續學習分子醫學，特別是蛋白質結構與疾病機轉間的關聯。延續我在自主研究中對阿茲海默症與β澱粉樣蛋白的探究，我計畫進一步學習生物資訊等知識。同時，我也將持續閱讀醫學期刊與研究文獻，培養批判性思考與科學素養，為日後在醫學系進行臨床與實驗研究打下堅實基礎。</p>
-            `,
-            'zh-phase2': `
-                <h2 class="text-2xl font-bold mb-4">中程目標：精進與深化--臺大六年醫學養成</h2>
-                <p class="mb-4">若有幸進入臺大醫學系的殿堂，我已為未來六年的學習旅程擬定了清晰且務實的計畫。我將以最大的熱忱與努力，追隨臺大「培育良醫」的步伐，將自己鍛鍊成一名具備深厚學識、臨床技能與人文素養的醫學生。</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">大一至大二：跨域整合，博學基石</h3>
-                <p class="mb-4">我對臺大醫學系打破傳統填鴨式教育，採行小組教學的模式深感認同與期待。在大一、大二階段，我的首要目標是奠定堅實的學術基礎，以開放的心態擁抱「跨領域學習」。在學業上，我將全力以赴修習「有機化學」、「普通生物學」、「生物化學」、「寄生蟲學」等基礎課程。我計畫使用Notion等數位工具，建立個人化的知識管理系統，將不同學科的知識點進行連結。我將積極參與系上「共筆」の製作，我認為這不僅是複習，更是透過團隊合作，深化知識理解的過程。</p>
-                <p class="mb-4">人文素養方面，我將深入研讀「普通社會學」等課程，培養批判性思考能力，例如，思考社會階層如何影響「健康保險制度」の制定與成效。我期望透過通識課程培養寬廣視野與人文關懷。大二階段，積極參與「小組討論」，學習與不同背景的同學協作。另外，我將注重時間管理並利用寒暑假彈性學習，培養自學能力與培養作為醫師「終身學習」的習慣。此階段的目標是GPA維持4.0。</p>
-                <p>在課外，我將積極參與醫學營的籌備與執行，將經驗分享給學弟妹。此外，我計畫延續高中的服務熱忱加入醫學服務社，將所學回饋社會。同時，我將加入司儀社。我相信醫師不僅是治療者，更是教育者與溝通者，清晰的口語表達與穩健的台風至關重要。我將以主持醫學系「授袍典禮」作為目標，砥礪自己的溝通能力。另外，爭取在社團中擔任幹部，培養領導與組織能力。課餘時間，閱讀醫學相關的英文期刊，提升專業語文能力。</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">大三至大四：鑽研核心，建構臨床思維</h3>
-                <p class="mb-4">隨著大三進入「解剖學」、「組織學」、「病理學」等核心基礎醫學課程，我知道學習的深度與廣度將迎來巨大的躍升。我對此充滿期待，特別是親手進行「大體解剖學」實驗的機會。我將懷著最崇高的敬意，向「大體老師」學習人體的奧秘，將書本上的平面知識轉化為立體的結構認知。</p>
-                <p class="mb-4">在這個階段，我將充分利用臺大的教學資源如實驗室、圖書館、共筆等，這將為我未來進入臨床奠定基礎。</p>
-                <p>面對大四末第一階段醫師國家考試，我將採取系統性整合複習策略。我會以人體各大系統（如心血管、呼吸、消化系統）為主軸，將解剖、生理、生化、藥理、病理、微生物六大科目的知識串連起來，建立有脈絡的知識網絡，而非零散的記憶。搭配歷屆試題演練與錯題分析，我相信我能順利通過國考，為進入臨床實習做好萬全準備。</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">大五至大六：走入臨床，實踐所學</h3>
-                <p>臨床實習是將書本知識轉化為濟世能力的關鍵。我將以最謙遜勤奮的態度，投入在臺大醫院的臨床學習。我會珍惜每一次跟隨主治醫師查房、參與晨會與病例討論的機會，學習前輩們的臨床思維與決策過程。我會從病歷書寫、病史詢問開始，紮實的練習每一項臨床技能，並以病人為中心，不僅關心其病情，更關懷其心理與社會層面的需求。我的目標不僅是成為一名合格的見習醫師，更希望能在此階段與病人共同面對疾病。</p>
-                <p>臺大醫學系擁有豐富的國際交流資源與眾多世界頂尖的策略夥伴大學。我將努力爭取在大五或大六時，赴海外姊妹校進行短期臨床交換學習的機會，例如前往韓國首爾大學醫學院或日本東京大學醫學部，體驗不同的醫療體系與文化，培養宏觀的全球健康視野。此階段的目標是順利通過第二階段醫師國家考試與OSCE臨床技能測驗，取得中華民國醫師執照並申請臺大醫院的不分科住院醫師（PGY）。</p>
-            `,
-            'zh-phase3': `
-                <h2 class="text-2xl font-bold mb-4">遠程目標：抱負與實踐--行醫生涯之擘劃</h2>
-                <p class="mb-4">我的職涯規劃，深受臺大醫學系「培育良醫、服務社會、領導醫界、貢獻人類」的教育宗旨啟發。我期許自己不僅成為一名醫術精湛的外科醫師，更是一位能站在科技前沿、具備國際視野、並樂於傳承奉獻的醫學創新者。</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">外科醫師之路：精準與溫度的融合</h3>
-                <p class="mb-4">完成PGY訓練後，我的首要目標是進入臺大醫院外科部接受住院醫師訓練，並最終成為一名主治醫師。我對外科的熱愛，源於刀鋒之間傳遞溫度的人性關懷與。我所嚮往的外科，是緊密結合人工智慧的新世代外科。</p>
-                <p class="mb-4">我的具體計畫是在住院醫師訓練階段，積極爭取參與臺大醫院「智慧醫療中心」の研究計畫。我從貴院網站了解到外科部的吳經閔副主任等教授，也在共同探討智慧醫療相關研究。我希望能有機會在他們的指導下，投入「外科手術AI應用」的領域。例如，建立病患專屬的虛擬解剖模型，能讓外科醫師在術前模擬手術路徑、預測風險與結果，是邁向個人化精準醫療的重要一步。我期許自己能成為一名懂得結合人工智慧，為病人擘劃最佳手術方案的「外科醫師科學家」。</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">前瞻研究與國際鏈結</h3>
-                <p class="mb-4">在成為獨當一面的外科主治醫師後，我的研究熱情將驅使我向更前沿的領域探索。我認為，機器人輔助手術目前的一大瓶頸，是缺乏「觸覺回饋」( Haptic Feedback），而外科醫師往往需依靠指尖觸感判斷組織の質地與張力。我的研究構想，是開發新型感測技術，將模擬出的組織觸感即時回傳到手術機械臂，讓醫師在遠端操作時也能感受到實際手感。這項技術不僅具學術價值，更可能改變外科手術的未來。</p>
-                <p class="mb-4">為了實現此一宏願，我將持續鑽研頂尖學術期刊如《Journal of the American College of Surgeons》及《Annals of Surgery》等最新文獻，並積極參與國內外學術研討會與研究。我觀察到，近年來關於AI在外科的應用正快速增長，例如著名美國心臟科醫師Eric Topol對與人工智慧結合醫學的研究，這成為激發我思考與行動的重要契機。</p>
-                <p class="mb-4">另外，在此階段我計畫了一段獨特的國際進修。我的家庭背景讓我對越南有著特殊的情感連結，因此，我計畫在取得專科醫師資格後，申請前往越南胡志明市的法越醫院 (FV Hospital） 進修。法越醫院是越南首家獲得JCI國際認證的頂尖私立醫院，引進了如CyberKnife S7等先進的放射外科機器人系統，代表了在不同社會經濟體下，追求卓越醫療的典範。我希望自己能夠體驗並學習其融合歐洲醫療管理模式與科技，並將這些寶貴的跨國、跨體系經驗帶回臺灣，為提升臺灣的醫療服務與國際競爭力貢獻己力。</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">傳承與貢獻：不負白袍之託付</h3>
-                <p class="mb-4">成為一名醫師，意味著承擔了傳承與社會責任。我期許自己，在行醫與研究之餘，能積極投入醫學教育，將我的臨床經驗與對科技的熱情，傳授給未來的學弟妹，如同前輩們一樣。我計畫定期參與國際醫療志工服務，將在臺大所學的醫術，帶到醫療資源匱乏的地區，實踐「貢獻人類」的崇高理想。</p>
-                <p>從國小時期的懵懂好奇，到如今對未來清晰的擘劃，我對醫學的熱情與日俱增，對進入臺大醫學系的渴望也無比堅定。我深信，唯有在臺大這座醫學巨塔中，我才能獲得最紮實的訓練、最前瞻的視野與最深厚的人文涵養。</p>
-            `,
-            'zh-conclusion': `
-                <h2 class="text-2xl font-bold mb-4">結語：選擇臺大，是我對未來最堅定的承諾</h2>
-                <p class="mb-4">這份讀書計畫，不僅是我對未來六年的學習規劃，更是我對自己、對醫學、對社會的莊嚴承諾。我渴望不僅成為一名外科醫師，更是一名承襲臺大「正直、創新、合作」精神、以科技與人文雙翼，為病患帶來希望、為醫學開創未來的「良醫」。選擇臺大醫學系，是我為實現此一理想，所能做出最堅定、也最正確的決定。</p>
-                <p>懇請教授們給予我機會，讓我在這片杏林聖殿中，學習、成長，並最終貢獻我畢生之力，無愧於這襲白袍的託付與社會的期待。</p>
-            `,
-            // English Content from the latest file
-            'en-phase1': `
-                <h2 class="text-2xl font-bold mb-4">Short-Term Goals: Foundation and Orientation—Preparation Before University</h2>
-                <p class="mb-4">To become a student who aligns with the expectations of the School of Medicine at National Taiwan University, my high school years were not solely dedicated to academic achievement but were a foundational journey for the future. I saw that period as a time of “quiet cultivation,” laying deep roots for steadily ascending the summit of medicine. From “science and the humanities” to the frontiers of medical research, I prepared myself comprehensively across these three domains to embrace the challenges ahead.</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">Building a Scaffold for Scientific Understanding</h3>
-                <p class="mb-4">I understand medicine is built on solid ground in the basic sciences. Hence, during high school, I put exceptional effort into biology, chemistry, physics, and mathematics—not content with simply learning them in class but intent on understanding the principles underlying the knowledge. I feel that only a good understanding of a few basic scientific principles will enable one to integrate complex medical knowledge in the future.</p>
-                <p class="mb-4">Before entering NTU, I plan to preview several key subjects. I will make a schedule to learn calculus by myself, using online resources. And also cellular structures and how life works in the basics of biology. I plan to learn organic chemistry and biochemistry and to become fluent in the language of amino acids, enzymes, and metabolic pathways.</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">Cultivating Humanistic Qualities</h3>
-                <p class="mb-4">A good physician embodies a scientific mind and a humanistic heart. Hence, if I am admitted to your school, I will surely continue my service to the community. During the summer before my enrollment, I will continue to further my volunteering at the hospital, where I will be able to closely witness doctor-patient relations and internalize the tenets of holistic care. This experience is intended to help me develop my empathy, communication, teamwork, and problem-solving skills. Ultimately, I hope to develop a perspective that integrates both medical knowledge and humanistic values, aligning with the core philosophy of NTU, which emphasizes the unity of medicine and the humanities.</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">Exploring the Frontiers of Medicine</h3>
-                <p>Acting on such motivation, I did not limit my learning to school. Since I knew that NTU highly regarded student-centered learning and enthusiasm for scientific inquiry, I engaged myself vigorously in independent research on smart medicine. I would therefore like to advance my knowledge of molecular medicine, specifically the link between protein structures and the mechanisms of diseases, before entering medical school. Given my prior research on Alzheimer's disease in relation to β-amyloid, I think that studying bioinformatics will allow me to gain critical thinking and scientific literacy skills by keeping up with academic journals. Thus, such an investigation will form a strong basis in clinical and laboratory work.</p>
-            `,
-            'en-phase2': `
-                <h2 class="text-2xl font-bold mb-4">Mid-Term Goals: Refinement and Deepening—Six Years of Medical Formation at NTU</h2>
-                <p class="mb-4">If given the honor of entering the School of Medicine, National Taiwan University, I have a very concrete and realistic six-year study plan that I would pursue with full commitment to developing excellent medical training in terms of solid academic knowledge, clinical skills, and humanistic aspects.</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">Years 1–2: Interdisciplinary Integration and a Broad Academic Foundation</h3>
-                <p class="mb-4">What stands out impressively is that NTU has moved away from rote memorization and now embraces the principles of group-based and inquiry-based learning. I believe that my first two years will serve as the grounding years, where I intend to be open to the rich opportunities for interdisciplinary learning. In this regard, I will focus on mastering the fundamentals of organic chemistry, general biology, parasitology, and biochemistry. Furthermore, I want to use digital tools to develop a personalized knowledge management system in Notion and will contribute in this regard to the departmental project of collaborative note-taking as a way to reinforce learning through collaboration.</p>
-                <p class="mb-4">In the humanities, I will take such courses as “Sociology,” where I will learn to develop critical thinking when asking how social class shapes the policies and outcomes of health insurance. I wish to expand my horizons with general education courses. In Year 2, I will participate in more group discussions, interact with students from diverse backgrounds, and make use of time management to shape lifelong practices in self-directed learning—one of the labels a day for any physician. I plan to have a 4.0 GPA at this stage.</p>
-                <p>Outside the classroom, I want to hold medical camps and share my experiences with junior students. I would also join the Medical Service Club at NTU to continue my services to other people. The other club I would join at NTU is the Master of Ceremonies Club, which hones communication and public speaking skills. A physician should be a healer, an educator, and a communicator, in essence. One of the milestones I want to achieve in my life is hosting the White Coat Ceremony for medical students. Furthermore, I will try to pursue some leadership positions in clubs to improve my organizing skills and read English medical journals so that I can use specific language in my profession and international communication.</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">Years 3–4: Deepening Core Knowledge and Developing Clinical Thinking</h3>
-                <p class="mb-4">With the start of core courses in Year 3, such as Anatomy, Histology, and Pathology, I anticipate a significant leap in both the depth and breadth of learning. I especially look forward to cadaver dissection as a way to transform theoretical knowledge into a 3D anatomical understanding, approached with utmost respect for the silent teachers. I will fully utilize NTU’s academic resources—laboratories, libraries, and Collaborative Notes—to prepare for clinical learning. Facing the first stage of the national physician licensing exam at the end of Year 4, I will adopt a systematic study strategy: organizing knowledge around major body systems (cardiovascular, respiratory, and digestive) and integrating content from anatomy, physiology, biochemistry, pharmacology, pathology, and microbiology. This will create a coherent knowledge framework rather than fragmented memorization. I will also practice past exams and analyze my mistakes to strengthen my readiness.</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">Years 5–6: Clinical Immersion and Practical Application</h3>
-                <p>Clinical rotations are a crucial point where knowledge turns into healing power. With humility and devotion, I shall start my clinical training at NTU Hospital by following attendings during ward rounds, attending morning meetings, and discussing cases to learn the logic behind clinical decision-making. I will acquire all the clinical skills orientation, from history-taking to medical record writing and the total patient care concept, embedding patients' medical, psychological, and social issues in the patient's core. I aim to become a competent clerk and co-traveler with the patient in the journey towards health. NTU has great international exchange opportunities for toppers with other universities, enabling me to engage in such short-term overseas exchanges during Year 5 or 6, exchanges with the Seoul National University College of Medicine or the University of Tokyo Faculty of Medicine, which may further nurture my global health perspective. The goal for this stage is to complete the second step within the national physician licensing exams and the Objective Structured Clinical Examination, which serve as the conduits through which one acquires one's physician license, then moves on to applying for a PGY for residency at National Taiwan University Hospital.</p>
-            `,
-            'en-phase3': `
-                <h2 class="text-2xl font-bold mb-4">Long-Term Goals: From Vision to Vocation</h2>
-                <p class="mb-4">“Before becoming a good doctor, one must first become a successful person.” This motto has guided my career vision from the start. I aspire not only to be a technically proficient surgeon but also a compassionate physician with social awareness, empathy, and responsibility. I want my surgical practice to be not only a matter of technique but also a bridge that connects people, ideas, and communities.</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">A Surgeon’s Art: Precision and Empathy Combined</h3>
-                <p class="mb-4">I intend to pursue training after PGY with a surgical residency program at National Taiwan University Hospital and assume the role of attending surgeon. Surgery is interesting due to the unique combination of technical skills and human compassion that coincide during an operation on the table. I see myself within next-gen surgery, tightly integrated into AI.</p>
-                <p class="mb-4">During residency training, I plan to actively pursue participation in research projects at the NTU Hospital, Center of Intelligent Healthcare. From your hospital’s official website, I learned that professors such as Associate Director Dr. Ching-Min Wu from the Department of Surgery are also engaged in research related to smart healthcare. I hope to have the opportunity to work under their guidance and dedicate myself to the field of AI applications in surgery. For example, developing patient-specific virtual anatomical models can allow surgeons to simulate surgical pathways and predict risks and outcomes before the operation—an important step toward personalized precision medicine. I aspire to become a “surgeon-scientist” who knows how to integrate artificial intelligence in order to design the best surgical plans for patients.</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">Innovative Research and International Exchange</h3>
-                <p class="mb-4">As a future attending surgeon, I will dive into my passion for research into its next frontiers. One of the significant limitations robotic surgery faces today is the absence of haptic feedback; however, surgeons often depend on fingertip sensations for information regarding the tension and texture of tissues. I expect to be involved in research that develops new technologies. For example, simulated tactile feedback through robotic surgical arms to afford surgeons "the sense of touch" while operating remotely on the tissues. I believe this would be revolutionary in the field of surgery.</p>
-                <p class="mb-4">Under the inspiration of pioneers, Dr. Eric Topol, who brings AI into medicine, is indeed one source of inspiration and motivation for me. In order to continue this further, I would hope to be actively involved in further studies at programs such as the Journal of the American College of Surgeons and Annals of Surgery and to attend international meetings and research on this topic. Apart from this, I have some special plans for international exposure. Given my family background, I have a strong emotional attachment to Vietnam. After my board certification in surgery, I will proceed with an international fellowship at Franco-Vietnamese Hospital (FV Hospital) in Ho Chi Minh City. Being the first privately held hospital in Vietnam to gain JCI accreditation, FV Hospital has an integrated system that includes the first CyberKnife S7 technology for radiosurgery. Indeed, it has state-of-the-art healthcare in a different but challenging socioeconomic context. I would consider it a great experience learning from such models inspired by Europe and bringing such cross-national insights into Taiwan for our medical system's better global competitiveness.</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">To Serve and Encourage: Bearing the Responsibility of the White Coat</h3>
-                <p>A physician's role extends far beyond the practice of medicine into the realms of teaching and service to society. I aspire to take part in medical education and pass along clinical experiences and my passion for technology to the next generation, much like my mentors did for me. Furthermore, I plan to participate in international medical outreach programs and use the skills I develop at NTU to serve the less fortunate, which is the noblest ideal of serving humanity. From the curiosity of childhood to a well-charted plan today, my passion for medicine only grows stronger. I am deeply committed to joining NTU's medical community, where I know I will receive world-class training, visionary exposure, and a solid humanistic foundation.</p>
-            `,
-            'en-conclusion': `
-                <h2 class="text-2xl font-bold mb-4">Conclusion: NTU Is More Than a Choice—It Is a Promise to My Future</h2>
-                <p class="mb-4">It is not merely an academic road map but an oath to myself, medicine, and society. A conviction within me goes beyond being a surgeon; I believe I would be joining NTU in spirit, blending technology and humanity to give hope to the patients in the development of their futures in medical care. This belief has been deeply ingrained in me through years of reflection and personal growth.</p>
-                <p>I am ready to embrace the challenges ahead and to dedicate my knowledge and compassion to the service of others. Through this journey, I aim to uphold the core values of integrity, excellence, and human dignity, making meaningful contributions to the field of medicine and society as a whole. Thus, I would say that joining the School of Medicine of National Taiwan University is the best, the most ardent, and truly my decision toward this ideal profession. I sincerely hope to be granted the opportunity to learn and grow at your esteemed university and to devote my life to honoring the white coat and fulfilling society’s trust.</p>
-            `
-        };
-
-        // Get DOM elements
-        const btnZh = document.getElementById('btn-zh');
-        const btnEn = document.getElementById('btn-en');
-        const selectZh = document.getElementById('select-zh');
-        const selectEn = document.getElementById('select-en');
-        const contentDisplay = document.getElementById('content-display');
-
-        // Function to switch language display
-        function switchLanguage(lang) {
-            contentDisplay.innerHTML = ''; // Clear content
-            if (lang === 'zh') {
-                btnZh.classList.add('btn-active');
-                btnEn.classList.remove('btn-active');
-                
-                selectZh.classList.remove('hidden');
-                selectEn.classList.add('hidden');
-                selectZh.value = ''; // Reset dropdown
-            } else {
-                btnEn.classList.add('btn-active');
-                btnZh.classList.remove('btn-active');
-
-                selectEn.classList.remove('hidden');
-                selectZh.classList.add('hidden');
-                selectEn.value = ''; // Reset dropdown
-            }
-        }
-
-        // Function to display content
-        function displayContent(key) {
-            contentDisplay.innerHTML = ''; // Clear first
-            if (key && studyPlanContent[key]) {
-                const content = studyPlanContent[key];
-                const contentWrapper = document.createElement('div');
-                contentWrapper.className = 'content-fade-in';
-                contentWrapper.innerHTML = content;
-                contentDisplay.appendChild(contentWrapper);
-            }
-        }
-
-        // Event listeners
-        btnZh.addEventListener('click', () => switchLanguage('zh'));
-        btnEn.addEventListener('click', () => switchLanguage('en'));
-        selectZh.addEventListener('change', (e) => displayContent(e.target.value));
-        selectEn.addEventListener('change', (e) => displayContent(e.target.value));
-
-        // Initial state - Removed the default language selection to hide dropdowns initially
-        // switchLanguage('zh'); 
-
-    </script>
+    </div>
 </body>
 </html>
