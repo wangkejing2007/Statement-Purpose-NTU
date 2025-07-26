@@ -83,10 +83,17 @@
             document.getElementById('zh-dropdown').style.display = language === 'zh' ? 'block' : 'none';
             document.getElementById('en-dropdown').style.display = language === 'en' ? 'block' : 'none';
         }
+
         function playChineseAudio(select) {
-            const audio = document.getElementById('zh-audio');
-            const source = document.getElementById('zh-audio-source');
+            const zhAudio = document.getElementById('zh-audio');
+            const zhSource = document.getElementById('zh-audio-source');
+            const enAudio = document.getElementById('en-audio');
             const value = select.value;
+
+            if (enAudio) {
+                enAudio.pause();
+                enAudio.style.display = 'none';
+            }
 
             let file = '';
             if (value === '近程計畫') file = 'NTU-C-Short-Term.mp3';
@@ -95,19 +102,26 @@
             else if (value === '結語') file = 'NTU-C-Conclusion.mp3';
 
             if (file) {
-                source.src = file;
-                audio.style.display = 'block';
-                audio.load();
-                audio.play();
+                zhSource.src = file;
+                zhAudio.style.display = 'block';
+                zhAudio.load();
+                zhAudio.play();
             } else {
-                audio.style.display = 'none';
-                audio.pause();
+                zhAudio.style.display = 'none';
+                zhAudio.pause();
             }
         }
+
         function playEnglishAudio(select) {
-            const audio = document.getElementById('en-audio');
-            const source = document.getElementById('en-audio-source');
+            const enAudio = document.getElementById('en-audio');
+            const enSource = document.getElementById('en-audio-source');
+            const zhAudio = document.getElementById('zh-audio');
             const value = select.value;
+
+            if (zhAudio) {
+                zhAudio.pause();
+                zhAudio.style.display = 'none';
+            }
 
             let file = '';
             if (value === 'Short-Term Plan') file = 'NTU-Short-Term.mp3';
@@ -116,13 +130,13 @@
             else if (value === 'Conclusion') file = 'NTU-Conclusion.mp3';
 
             if (file) {
-                source.src = file;
-                audio.style.display = 'block';
-                audio.load();
-                audio.play();
+                enSource.src = file;
+                enAudio.style.display = 'block';
+                enAudio.load();
+                enAudio.play();
             } else {
-                audio.style.display = 'none';
-                audio.pause();
+                enAudio.style.display = 'none';
+                enAudio.pause();
             }
         }
     </script>
