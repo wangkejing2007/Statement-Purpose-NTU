@@ -1,201 +1,203 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的讀書計畫</title>
-    <style>
-        body {
-            background-color: #352C2C;
-            font-family: 'Helvetica Neue', '微軟正黑體', 'Microsoft JhengHei', sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            text-align: center;
-            background-color: #352C2C;
-            padding: 40px;
-            border-radius: 20px;
-            width: 100%;
-        }
-        .header-image {
-            width: 45%;
-            height: auto;
-            border-radius: 5px;
-            margin-bottom: 5px;
-        }
-        @media (max-width: 600px) {
-            .header-image {
-                width: 90%;
-            }
-        }
-        h1 {
-            font-size: 52px;
-            color: #FC0303;
-            font-family: serif;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 28px;
-            }
-        }
-        h2 {
-            font-size: 24px;
-            color: #C9CACA;
-            font-weight: 600;
-            margin-top: 10px;
-            margin-bottom: 0;
-        }
-        .notice {
-            color: #FFDD57;
-            font-size: 16px;
-            margin-top: 0;
-        }
-        .button-group {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .custom-button {
-            padding: 20px 40px;
-            background-color: #352C2C;
-            color: #FC0303;
-            border: 2px solid #FC0303;
-            border-radius: 10px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        @media (max-width: 600px) {
-            .custom-button {
-                padding: 10px 20px;
-                font-size: 18px;
-            }
-        }
-        .custom-button:hover {
-            background-color: #FC0303;
-            color: #ffffff;
-        }
-        .dropdown {
-            display: none;
-            margin-top: 20px;
-        }
-        select {
-            font-size: 28px;
-            padding: 10px;
-            border-radius: 8px;
-            border: 2px solid #FC0303;
-            background-color: #352C2C;
-            color: white;
-        }
-    </style>
-    <script>
-        function showDropdown(language) {
-            document.getElementById('zh-dropdown').style.display = language === 'zh' ? 'block' : 'none';
-            document.getElementById('en-dropdown').style.display = language === 'en' ? 'block' : 'none';
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的讀書計畫</title>
+  <style>
+    body {
+      background-color: #352C2C;
+      font-family: 'Helvetica Neue', '微軟正黑體', 'Microsoft JhengHei', sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      text-align: center;
+      background-color: #352C2C;
+      padding: 40px;
+      border-radius: 20px;
+      width: 100%;
+    }
+    .header-image {
+      width: 50%;
+      height: auto;
+      border-radius: 15px;
+      margin-bottom: 5px;
+    }
+    h1 {
+      font-size: 52px;
+      color: #FC0303;
+      font-family: serif;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 22px;
+      color: #C9CACA;
+      font-weight: 600;
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+    .notice {
+      color: #FFDD57;
+      font-size: 16px;
+      margin-top: 0;
+    }
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .custom-button {
+  padding: 12px 24px;
+  background-color: #352C2C;
+  color: #FC0303;
+  border: 2px solid #FC0303;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+    .custom-button:hover {
+      background-color: #FC0303;
+      color: #ffffff;
+    }
+    .dropdown {
+      display: none;
+      margin-top: 20px;
+    }
+    select {
+      font-size: 28px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 2px solid #FC0303;
+      background-color: #352C2C;
+      color: white;
+    }
+    @media (max-width: 600px) {
+      .header-image {
+        width: 90%;
+      }
+      h1 {
+        font-size: 28px;
+      }
+      h2 {
+        font-size: 18px;
+      }
+      .notice {
+        font-size: 14px;
+      }
+      .custom-button {
+        padding: 10px 20px;
+        font-size: 18px;
+      }
+    }
+  </style>
+  <script>
+    function showDropdown(language) {
+      document.getElementById('zh-dropdown').style.display = language === 'zh' ? 'block' : 'none';
+      document.getElementById('en-dropdown').style.display = language === 'en' ? 'block' : 'none';
+    }
 
-        function playChineseAudio(select) {
-            const zhAudio = document.getElementById('zh-audio');
-            const zhSource = document.getElementById('zh-audio-source');
-            const enAudio = document.getElementById('en-audio');
-            const value = select.value;
+    function playChineseAudio(select) {
+      const zhAudio = document.getElementById('zh-audio');
+      const zhSource = document.getElementById('zh-audio-source');
+      const enAudio = document.getElementById('en-audio');
+      const value = select.value;
 
-            if (enAudio) {
-                enAudio.pause();
-                enAudio.style.display = 'none';
-            }
+      if (enAudio) {
+        enAudio.pause();
+        enAudio.style.display = 'none';
+      }
 
-            let file = '';
-            if (value === '近程計畫') file = 'NTU-C-Short-Term.mp3';
-            else if (value === '中程計畫') file = 'NTU-C-Mid-Term.mp3';
-            else if (value === '遠程計畫') file = 'NTU-C-Long-Term.mp3';
-            else if (value === '結語') file = 'NTU-C-Conclusion.mp3';
+      let file = '';
+      if (value === '近程計畫') file = 'NTU-C-Short-Term.mp3';
+      else if (value === '中程計畫') file = 'NTU-C-Mid-Term.mp3';
+      else if (value === '遠程計畫') file = 'NTU-C-Long-Term.mp3';
+      else if (value === '結語') file = 'NTU-C-Conclusion.mp3';
 
-            if (file) {
-                zhSource.src = file;
-                zhAudio.style.display = 'block';
-                zhAudio.load();
-                zhAudio.play();
-            } else {
-                zhAudio.style.display = 'none';
-                zhAudio.pause();
-            }
-        }
+      if (file) {
+        zhSource.src = file;
+        zhAudio.style.display = 'block';
+        zhAudio.load();
+        zhAudio.play();
+      } else {
+        zhAudio.style.display = 'none';
+        zhAudio.pause();
+      }
+    }
 
-        function playEnglishAudio(select) {
-            const enAudio = document.getElementById('en-audio');
-            const enSource = document.getElementById('en-audio-source');
-            const zhAudio = document.getElementById('zh-audio');
-            const value = select.value;
+    function playEnglishAudio(select) {
+      const enAudio = document.getElementById('en-audio');
+      const enSource = document.getElementById('en-audio-source');
+      const zhAudio = document.getElementById('zh-audio');
+      const value = select.value;
 
-            if (zhAudio) {
-                zhAudio.pause();
-                zhAudio.style.display = 'none';
-            }
+      if (zhAudio) {
+        zhAudio.pause();
+        zhAudio.style.display = 'none';
+      }
 
-            let file = '';
-            if (value === 'Short-Term Plan') file = 'NTU-Short-Term.mp3';
-            else if (value === 'Mid-Term Plan') file = 'NTU-Mid-Term.mp3';
-            else if (value === 'Long-Term Plan') file = 'NTU-Long-Term.mp3';
-            else if (value === 'Conclusion') file = 'NTU-Conclusion.mp3';
+      let file = '';
+      if (value === 'Short-Term Plan') file = 'NTU-Short-Term.mp3';
+      else if (value === 'Mid-Term Plan') file = 'NTU-Mid-Term.mp3';
+      else if (value === 'Long-Term Plan') file = 'NTU-Long-Term.mp3';
+      else if (value === 'Conclusion') file = 'NTU-Conclusion.mp3';
 
-            if (file) {
-                enSource.src = file;
-                enAudio.style.display = 'block';
-                enAudio.load();
-                enAudio.play();
-            } else {
-                enAudio.style.display = 'none';
-                enAudio.pause();
-            }
-        }
-    </script>
+      if (file) {
+        enSource.src = file;
+        enAudio.style.display = 'block';
+        enAudio.load();
+        enAudio.play();
+      } else {
+        enAudio.style.display = 'none';
+        enAudio.pause();
+      }
+    }
+  </script>
 </head>
 <body>
-    <div class="container">
-        <img src="https://youke1.picui.cn/s1/2025/07/26/6884b9925c7d0.png" alt="讀書計畫主圖" class="header-image">
-        <h1>Statement of Purpose</h1>
-        <h2>聆聽王可靜的讀書計畫</h2>
-        <p class="notice">⚠️此音訊檔以我的聲音樣本使用TTS合成語音。</p>
-        <div class="button-group">
-            <button class="custom-button" style="color: white;" onclick="showDropdown('zh')">中文版</button>
-            <button class="custom-button" style="color: white;" onclick="showDropdown('en')">英文版</button>
-        </div>
-        <div class="dropdown" id="zh-dropdown">
-            <select style="border: 2px solid #FFFFFF;" onchange="playChineseAudio(this)">
-                <option>選擇階段</option>
-                <option>近程計畫</option>
-                <option>中程計畫</option>
-                <option>遠程計畫</option>
-                <option>結語</option>
-            </select>
-            <audio id="zh-audio" controls style="display:none; margin: 30px auto 0 auto; width: 75%; display: block;">
-                <source id="zh-audio-source" src="" type="audio/mpeg">
-                您的瀏覽器不支援音訊播放。
-            </audio>
-        </div>
-        <div class="dropdown" id="en-dropdown">
-            <select style="border: 2px solid #FFFFFF;" onchange="playEnglishAudio(this)">
-                <option>Please Select...</option>
-                <option>Short-Term Plan</option>
-                <option>Mid-Term Plan</option>
-                <option>Long-Term Plan</option>
-                <option>Conclusion</option>
-            </select>
-            <audio id="en-audio" controls style="display:none; margin: 30px auto 0 auto; width: 75%; display: block;">
-                <source id="en-audio-source" src="" type="audio/mpeg">
-                Your browser does not support audio playback.
-            </audio>
-        </div>
+  <div class="container">
+    <img src="https://youke1.picui.cn/s1/2025/07/26/6884b9925c7d0.png" alt="讀書計畫主圖" class="header-image">
+    <h1>Statement of Purpose</h1>
+    <h2>聆聽王可靜的讀書計畫</h2>
+    <p class="notice">⚠️此音訊檔以我的聲音樣本使用TTS合成語音。</p>
+    <div class="button-group">
+      <button class="custom-button" style="color: white;" onclick="showDropdown('zh')">中文版</button>
+      <button class="custom-button" style="color: white;" onclick="showDropdown('en')">英文版</button>
     </div>
+    <div class="dropdown" id="zh-dropdown">
+      <select onchange="playChineseAudio(this)" style="border: 2px solid #FFFFFF;">
+        <option>選擇階段</option>
+        <option>近程計畫</option>
+        <option>中程計畫</option>
+        <option>遠程計畫</option>
+        <option>結語</option>
+      </select>
+      <audio id="zh-audio" controls style="display:none; margin: 30px auto 0 auto; width: 75%; display: block;">
+        <source id="zh-audio-source" src="" type="audio/mpeg">
+        您的瀏覽器不支援音訊播放。
+      </audio>
+    </div>
+    <div class="dropdown" id="en-dropdown">
+      <select onchange="playEnglishAudio(this)" style="border: 2px solid #FFFFFF;">
+        <option>Please Select...</option>
+        <option>Short-Term Plan</option>
+        <option>Mid-Term Plan</option>
+        <option>Long-Term Plan</option>
+        <option>Conclusion</option>
+      </select>
+      <audio id="en-audio" controls style="display:none; margin: 30px auto 0 auto; width: 75%; display: block;">
+        <source id="en-audio-source" src="" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+  </div>
 </body>
 </html>
