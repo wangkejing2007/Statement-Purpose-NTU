@@ -111,9 +111,9 @@
       }
 
       let file = '';
-      if (value === '近程計畫') file = 'NTU-C-Short-Term.mp3';
-      else if (value === '中程計畫') file = 'NTU-C-Mid-Term.mp3';
-      else if (value === '遠程計畫') file = 'NTU-C-Long-Term.mp3';
+      if (value === '近程目標') file = 'NTU-C-Short-Term.mp3';
+      else if (value === '中程目標') file = 'NTU-C-Mid-Term.mp3';
+      else if (value === '遠程目標') file = 'NTU-C-Long-Term.mp3';
       else if (value === '結語') file = 'NTU-C-Conclusion.mp3';
 
       if (file) {
@@ -169,9 +169,9 @@
     <div class="dropdown" id="zh-dropdown">
       <select onchange="playChineseAudio(this)" style="border: 2px solid #FFFFFF;">
         <option>選擇階段...</option>
-        <option>近程計畫</option>
-        <option>中程計畫</option>
-        <option>遠程計畫</option>
+        <option>近程目標</option>
+        <option>中程目標</option>
+        <option>遠程目標</option>
         <option>結語</option>
       </select>
       <audio id="zh-audio" controls style="display:none; margin: 30px auto 0 auto; width: 75%; display: block;">
