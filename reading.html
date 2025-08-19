@@ -1,197 +1,115 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>臺灣大學醫學系讀書計畫</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', 'Noto Sans TC', sans-serif;
-            background-color: #f0eee4; /* A slightly darker, academic cream color */
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>臺灣大學醫學系讀書計畫</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Noto Sans TC', sans-serif;
+      background-color: #f0eee4;
+    }
 
-        .header-image {
-            width: 30%;
-            height: auto;
-            border-radius: 5px;
-            margin-bottom: 5px;
-        }
-        /* Content fade-in animation */
-        .content-fade-in {
-            opacity: 0;
-            animation: fadeIn 0.8s ease-in-out forwards;
-        }
+    .header-image { width: 30%; height: auto; border-radius: 5px; margin-bottom: 5px; }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Container for the select dropdown to prevent content jumping */
-        .select-container {
-            min-height: 60px; 
-        }
+    .content-fade-in { opacity: 0; animation: fadeIn 0.8s ease-in-out forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
 
-        /* General button style */
-        .lang-btn {
-            background-color: #e2e8f0; /* Light gray-blue */
-            color: #2d3748; /* Darker gray text */
-            transition: transform 0.2s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease;
-            border: 2px solid #003366; /* Added dark blue border */
-        }
+    .select-container { min-height: 60px; }
 
-        /* Button hover effect */
-        .lang-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
-        }
-
-        /* Active button state */
-        .btn-active {
-            background-color: #003366; /* A representative color for NTU/Academia */
-            color: white;
-            box-shadow: 0 4px 14px 0 rgba(0, 51, 102, 0.3);
-            transform: translateY(-2px);
-            border-color: #003366; /* Ensure border color matches on active */
-        }
-
-        /* Custom style for dropdown background */
-        select {
-            background-color: #E5E7EB; /* Light gray background for dropdowns (Tailwind gray-200) */
-        }
-
-    </style>
+    .lang-btn { background-color: #e2e8f0; color: #2d3748; transition: transform .2s, background-color .3s, color .3s, box-shadow .3s; border: 2px solid #003366; }
+    .lang-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.08); }
+    .btn-active { background-color:#003366; color:#fff; box-shadow:0 4px 14px rgba(0,51,102,.3); transform: translateY(-2px); border-color:#003366; }
+    select { background-color:#E5E7EB; }
+  </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
-            <!-- 新增的圖片 -->
-            <div class="flex justify-center mb-2 mt-16">
-                <img src="https://i.meee.com.tw/wyn8U4j.png" 
-     alt="台大醫學系徽" 
-     style="width: 30%; max-width: 250px;" 
-     onerror="this.style.display='none'">
-            </div>    
-            <header class="text-center mb-6">
-                <h1 class="text-3xl md:text-5xl font-bold text-[#41656b] flex flex-col items-center leading-tight md:leading-snug">
-                    <span>國立臺灣大學醫學系</span>
-                    <span class="text-2xl md:text-4xl">王可靜-中英文讀書計畫</span>
-                </h1>
-                <p class="mt-2 font-bold" style="color: #616666;">Statement of Purpose for School of Medicine, NTU</p>
-            </header>
+  <!-- ✅ 改成 pt-2 縮短圖片與頂端距離 -->
+  <div class="pt-2">
+    <div class="flex justify-center mb-2">
+      <img src="https://i.meee.com.tw/wyn8U4j.png" alt="台大醫學系徽" class="header-image" style="max-width:250px;" onerror="this.style.display='none'" />
+    </div>
 
-            <!-- Language selection buttons -->
-            <div class="flex justify-center space-x-2 md:space-x-4 pb-4 mb-4">
-                <button id="btn-zh" class="lang-btn flex-1 md:flex-none md:px-8 py-3 text-base md:text-lg font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    中文讀書計畫
-                </button>
-                <button id="btn-en" class="lang-btn flex-1 md:flex-none md:px-8 py-3 text-base md:text-lg font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    Statement of Purpose
-                </button>
-            </div>
+    <header class="text-center mb-6">
+      <h1 class="text-3xl md:text-5xl font-bold text-[#41656b] flex flex-col items-center leading-tight md:leading-snug">
+        <span>國立臺灣大學醫學系</span>
+        <span class="text-2xl md:text-4xl">王可靜-中英文讀書計畫</span>
+      </h1>
+      <p class="mt-2 font-bold" style="color: #616666;">Statement of Purpose for School of Medicine, NTU</p>
+    </header>
+  </div>
 
-            <!-- Dropdown container -->
-            <div class="text-center mb-4 select-container">
-                <!-- Chinese dropdown -->
-                <select id="select-zh" class="w-full max-w-md p-3 border border-gray-400 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition hidden">
-                    <option value="">請選擇讀書計畫階段</option>
-                    <option value="zh-phase1">近程目標：奠基與定向</option>
-                    <option value="zh-phase2">中程目標：精進與深化</option>
-                    <option value="zh-phase3">遠程目標：抱負與實踐</option>
-                    <option value="zh-conclusion">結語：選擇臺大之承諾</option>
-                </select>
-                <!-- English dropdown -->
-                <select id="select-en" class="w-full max-w-md p-3 border border-gray-400 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition hidden">
-                    <option value="">Please Select a Section</option>
-                    <option value="en-phase1">Short-Term Goals: Foundation & Orientation</option>
-                    <option value="en-phase2">Mid-Term Goals: Refinement & Deepening</option>
-                    <option value="en-phase3">Long-Term Goals: From Vision to Vocation</option>
-                    <option value="en-conclusion">Conclusion: NTU Is More Than a Choice</option>
-                </select>
-            </div>
+  <div class="flex justify-center space-x-2 md:space-x-4 pb-4 mb-4">
+    <button id="btn-zh" class="lang-btn flex-1 md:flex-none md:px-8 py-3 text-base md:text-lg font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">中文讀書計畫</button>
+    <button id="btn-en" class="lang-btn flex-1 md:flex-none md:px-8 py-3 text-base md:text-lg font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Statement of Purpose</button>
+  </div>
 
-            <!-- Content display area -->
-            <div id="content-display" class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-                <!-- Content will be dynamically loaded here -->
-            </div>
+  <div class="text-center mb-4 select-container">
+    <select id="select-zh" class="w-full max-w-md p-3 border border-gray-400 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition hidden">
+      <option value="">請選擇讀書計畫階段</option>
+      <option value="zh-phase1">近程目標：奠基與定向</option>
+      <option value="zh-phase2">中程目標：精進與深化</option>
+      <option value="zh-phase3">遠程目標：抱負與實踐</option>
+      <option value="zh-conclusion">結語：選擇臺大之承諾</option>
+    </select>
+    <select id="select-en" class="w-full max-w-md p-3 border border-gray-400 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition hidden">
+      <option value="">Please Select a Section</option>
+      <option value="en-phase1">Short-Term Goals: Foundation & Orientation</option>
+      <option value="en-phase2">Mid-Term Goals: Refinement & Deepening</option>
+      <option value="en-phase3">Long-Term Goals: From Vision to Vocation</option>
+      <option value="en-conclusion">Conclusion: NTU Is More Than a Choice</option>
+    </select>
+  </div>
 
+  <div id="content-display" class="prose prose-lg max-w-none text-gray-700 leading-relaxed"></div>
 
-    <footer class="w-full text-center py-4">
-        <p class="font-bold text-sm" style="color: #41656b;">(越南)胡志明市臺灣學校 / 王可靜</p>
-    </footer>
+  <footer class="w-full text-center py-4">
+    <p class="font-bold text-sm" style="color: #41656b;">(越南)胡志明市臺灣學校 / 王可靜</p>
+  </footer>
 
-    <script>
-        // Object to store the study plan content, updated from the new files.
-        const studyPlanContent = {
-            // Chinese Content from the latest file
-            'zh-phase1': `...`,
-            'zh-phase2': `...`,
-            'zh-phase3': `...`,
-            'zh-conclusion': `...`,
-            // English Content from the latest file
-            'en-phase1': `...`,
-            'en-phase2': `...`,
-            'en-phase3': `...`,
-            'en-conclusion': `...`
-        };
+  <script>
+    const studyPlanContent = {
+      'zh-phase1': `...`, 'zh-phase2': `...`, 'zh-phase3': `...`, 'zh-conclusion': `...`,
+      'en-phase1': `...`, 'en-phase2': `...`, 'en-phase3': `...`, 'en-conclusion': `...`
+    };
 
-        // Get DOM elements
-        const btnZh = document.getElementById('btn-zh');
-        const btnEn = document.getElementById('btn-en');
-        const selectZh = document.getElementById('select-zh');
-        const selectEn = document.getElementById('select-en');
-        const contentDisplay = document.getElementById('content-display');
+    const btnZh = document.getElementById('btn-zh');
+    const btnEn = document.getElementById('btn-en');
+    const selectZh = document.getElementById('select-zh');
+    const selectEn = document.getElementById('select-en');
+    const contentDisplay = document.getElementById('content-display');
 
-        // Function to switch language display
-        function switchLanguage(lang) {
-            contentDisplay.innerHTML = ''; // Clear content
-            if (lang === 'zh') {
-                btnZh.classList.add('btn-active');
-                btnEn.classList.remove('btn-active');
-                
-                selectZh.classList.remove('hidden');
-                selectEn.classList.add('hidden');
-                selectZh.value = ''; // Reset dropdown
-            } else {
-                btnEn.classList.add('btn-active');
-                btnZh.classList.remove('btn-active');
+    function switchLanguage(lang) {
+      contentDisplay.innerHTML = '';
+      if (lang === 'zh') {
+        btnZh.classList.add('btn-active'); btnEn.classList.remove('btn-active');
+        selectZh.classList.remove('hidden'); selectEn.classList.add('hidden'); selectZh.value = '';
+      } else {
+        btnEn.classList.add('btn-active'); btnZh.classList.remove('btn-active');
+        selectEn.classList.remove('hidden'); selectZh.classList.add('hidden'); selectEn.value = '';
+      }
+    }
 
-                selectEn.classList.remove('hidden');
-                selectZh.classList.add('hidden');
-                selectEn.value = ''; // Reset dropdown
-            }
-        }
+    function displayContent(key) {
+      contentDisplay.innerHTML = '';
+      if (key && studyPlanContent[key]) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'content-fade-in';
+        wrapper.innerHTML = studyPlanContent[key];
+        contentDisplay.appendChild(wrapper);
+      }
+    }
 
-        // Function to display content
-        function displayContent(key) {
-            contentDisplay.innerHTML = ''; // Clear first
-            if (key && studyPlanContent[key]) {
-                const content = studyPlanContent[key];
-                const contentWrapper = document.createElement('div');
-                contentWrapper.className = 'content-fade-in';
-                contentWrapper.innerHTML = content;
-                contentDisplay.appendChild(contentWrapper);
-            }
-        }
-
-        // Event listeners
-        btnZh.addEventListener('click', () => switchLanguage('zh'));
-        btnEn.addEventListener('click', () => switchLanguage('en'));
-        selectZh.addEventListener('change', (e) => displayContent(e.target.value));
-        selectEn.addEventListener('change', (e) => displayContent(e.target.value));
-
-        // Initial state - Removed the default language selection to hide dropdowns initially
-        // switchLanguage('zh'); 
-
-    </script>
+    btnZh.addEventListener('click', () => switchLanguage('zh'));
+    btnEn.addEventListener('click', () => switchLanguage('en'));
+    selectZh.addEventListener('change', (e) => displayContent(e.target.value));
+    selectEn.addEventListener('change', (e) => displayContent(e.target.value));
+  </script>
 </body>
 </html>
