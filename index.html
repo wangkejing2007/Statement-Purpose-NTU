@@ -70,13 +70,30 @@
             box-shadow: 0 6px 12px rgba(51, 56, 102, 0.8);
             color: #A3A3A3;
         }
+        /* 手機版調整：圖片放大、標題與按鈕縮小 */
+        @media (max-width: 600px) {
+            .header-image {
+                width: 60%;
+                max-width: none;
+            }
+            h1 {
+                font-size: 28px;
+            }
+            h2 {
+                font-size: 22px;
+            }
+            .action-button {
+                font-size: 20px;
+                padding: 12px 20px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <img src="https://i.meee.com.tw/wyn8U4j.png" 
              alt="台大醫學系徽" 
-             style="width: 30%; max-width: 250px;" 
+             class="header-image"
              onerror="this.style.display='none'">
         <h1>Statement of Purpose</h1>
         <h2>王可靜的讀書計畫</h2>
